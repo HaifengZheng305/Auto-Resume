@@ -23,8 +23,5 @@ try:
 except Exception as e:
     print(f"Connection Error: {str(e)}")
     print("Error Type:", type(e).__name__)
-except Exception as e:
-    print(f"Connection Error: {str(e)}")
-    print("Error Type:", type(e).__name__)
 
     
