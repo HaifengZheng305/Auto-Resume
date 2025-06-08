@@ -16,6 +16,8 @@ if not mongo_uri:
 # Check URI format
 
 client = MongoClient(mongo_uri, server_api=ServerApi('1'))
+db = client["resume-builder"]
+user_collection = db["users"]
 
 try:
     client.admin.command('ping')
