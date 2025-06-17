@@ -67,26 +67,17 @@ class UserCreate(BaseModel):
         }
     }
 
-# For responses
-class UserResponse(BaseModel):
-    id: PyObjectId
-    email: EmailStr
-    username: str
-    provider: str
-    roles: List[str]
-    
-    model_config = {
-        "from_attributes": True
-    }
 
 class UserUpdatePassword(BaseModel):
     username: str
+    cur_password: str
     new_password: str
 
 class UserLogin(BaseModel):
     username: str
     password: str
 
-class UserDelete(BaseModel):
+
+class UserOut(BaseModel):
+    id: str
     username: str
-    password: str
