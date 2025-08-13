@@ -6,6 +6,7 @@ const {
   updateResume,
   deleteResume,
 } = require("../controllers/resumeController");
+const { optimizeResume } = require("../controllers/experienceOptimizer");
 const { protect } = require("../middlewares/authMiddleware");
 const { uploadResumeImages } = require("../controllers/uploadImages");
 
@@ -17,6 +18,8 @@ router.get("/", protect, getUserResumes);   // Get Resume
 router.get("/:id", protect, getResumeById);   // Get Resume By ID
 router.put("/:id", protect, updateResume);   // Update Resume
 router.put("/:id/upload-images", protect, uploadResumeImages);
+router.post("/optimize",optimizeResume);
+
 
 router.delete("/:id", protect, deleteResume);   // Delete Resume
 
