@@ -70,8 +70,6 @@ const AdditionalInfoFrom = ({
         </div>
       </div>
 
-      {console.log(interests)}
-
       {/* Interests Section */}
       <div className="mt-8 mb-4">
         <h3 className="text-sm font-semibold text-gray-700">Interests</h3>

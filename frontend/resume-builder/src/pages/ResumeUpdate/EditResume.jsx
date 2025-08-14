@@ -538,6 +538,44 @@ const EditResume = () => {
     }
   };
 
+  const optimizeResumeExperience = async() => {
+    try {
+      setIsLoading(true);
+      
+      // For now, using a placeholder job description
+      // In a real implementation, you'd want to add a job description input field
+      const jobDescription = "Software Engineer position requiring React, Node.js, and database skills";
+      
+      const response = await axiosInstance.post(
+        API_PATHS.RESUME.OPTIMIZE_RESUME(resumeId),
+        {
+          resume: resumeData,
+          description: jobDescription
+        }
+      );
+
+      if (response.data) {
+        // Update the resume data with optimized experience
+        setResumeData(prevData => ({
+          ...prevData,
+          workExperience: response.data.workExperience || prevData.workExperience
+        }));
+        toast.success("Resume experience optimized successfully!");
+      }
+    } catch (err) {
+      console.error("Error optimizing resume:", err);
+      toast.error("Failed to optimize resume experience");
+    } finally {
+      setIsLoading(false);
+    }
+    //get the job experience
+    //call the backend
+    //return the experience section
+    //update it into the current resume.
+
+
+  }
+
   // Delete Resume
   const handleDeleteResume = async () => {
      try {
@@ -635,6 +673,16 @@ const EditResume = () => {
                   <LuArrowLeft className="text-[16px]" />
                   Back
                 </button>
+                {currentPage === "additionalInfo" &&(
+                <button
+                  className="btn-small-light"
+                  onClick={optimizeResumeExperience}
+                  disabled={isLoading}
+                >
+                  <LuSave className="text-[16px]" />
+                  {isLoading ? "Updating..." : "Optimize"}
+                </button>
+              )}
                 <button
                   className="btn-small-light"
                   onClick={uploadResumeImages}
@@ -643,6 +691,7 @@ const EditResume = () => {
                   <LuSave className="text-[16px]" />
                   {isLoading ? "Updating..." : "Save & Exit"}
                 </button>
+
                 <button
                   className="btn-small"
                   onClick={validateAndNext}
