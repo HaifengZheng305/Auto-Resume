@@ -11,17 +11,31 @@ const optimizerHelper = async (resume, jobDescription) => {
             temperature: 0,
           });
 
+
         // TODO: Implement actual AI optimization logic here
         // For now, return the original resume with a note
-        console.log("Optimizing work experience for job description:", description);
+
         
-        // Placeholder for AI optimization
-        // const messages = [
-        //     new SystemMessage("Translate the following from English into Italian"),
-        //     new HumanMessage("hi!"),
-        // ];
+        //Placeholder for AI optimization
+        const messages = [
+            new SystemMessage(`You are a Resume Experience Optimizer. 
+  Based on this Job Description: ${description}, identify key words and change the key words of each work experience in the the following work experience: ${JSON.stringify(workExperience, null, 2)} to best fit the jobdescription.
+  keep the job title for each work experience and keep the essence of each job description but change the keys to best fit the job description,
+  Key words include action verbs, technologies used, and skills required.
+  Return the response as a list of JSON object with the format for each work experience:
+  [{
+    "jobTitle": "...",
+    "optimizedExperience": ["line1", "line2", ...]
+            }]
+    
+Also provide explain of what you changed        `
         
-        // const response = await model.invoke(messages);
+    ),
+        ];
+        
+        const response = await model.invoke(messages);
+
+        console.log(response.content)
         // const optimizedExperience = JSON.parse(response.content);
 
         // For now, return the original resume
@@ -45,9 +59,6 @@ const optimizeResume = async (req, res) => {
         if (!resume) {
             return res.status(400).json({ message: "Resume data is required" });
         }
-
-        console.log("Optimizing resume for job description:", description);
-    
         const optimizedResume = await optimizerHelper(resume, description);
 
         console.log("Resume optimization completed");

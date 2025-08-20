@@ -43,6 +43,7 @@ const EditResume = () => {
 
   const [currentPage, setCurrentPage] = useState("profile-info");
   const [progress, setProgress] = useState(0);
+  const [jobDescription, setJobDescription] = useState("");
   const [resumeData, setResumeData] = useState({
     title: "",
     thumbnailLink: "",
@@ -373,6 +374,8 @@ const EditResume = () => {
           <AdditionalInfoFrom
             languages={resumeData.languages}
             interests={resumeData.interests}
+            jobDescription={jobDescription}
+            setJobDescription={setJobDescription}
             updateArrayItem={(section, index, key, value) =>
               updateArrayItem(section, index, key, value)
             }
@@ -380,6 +383,7 @@ const EditResume = () => {
             removeArrayItem={(section, index) =>
               removeArrayItem(section, index)
             }
+            setOpenPreviewModal={setOpenPreviewModal}
           />
         );
 
@@ -542,9 +546,11 @@ const EditResume = () => {
     try {
       setIsLoading(true);
       
-      // For now, using a placeholder job description
-      // In a real implementation, you'd want to add a job description input field
-      const jobDescription = "Software Engineer position requiring React, Node.js, and database skills";
+      // Use the job description from state
+      if (!jobDescription.trim()) {
+        toast.error("Please enter a job description first");
+        return;
+      }
       
       const response = await axiosInstance.post(
         API_PATHS.RESUME.OPTIMIZE_RESUME(resumeId),

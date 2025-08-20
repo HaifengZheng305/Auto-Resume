@@ -6,11 +6,15 @@ import RatingInput from "../../../components/ResumeSections/RatingInput";
 const AdditionalInfoFrom = ({
   languages,
   interests,
+  jobDescription,
+  setJobDescription,
   updateArrayItem,
   addArrayItem,
   removeArrayItem,
+  setOpenPreviewModal
 }) => {
-  return <div className="px-5 pt-5">
+  return (
+    <div className="px-5 pt-5">
       <h2 className="text-lg font-semibold text-gray-900">Additional Info</h2>
 
       {/* Languages Section */}
@@ -108,7 +112,25 @@ const AdditionalInfoFrom = ({
           </button>
         </div>
       </div>
+
+      {/* Job Description */}
+      <div className="mt-8 mb-4">
+        <h3 className="text-sm font-semibold text-gray-700">Job Description</h3>
+          <div
+            className="relative rounded-lg"
+          >
+          <textarea
+            className="w-full border border-gray-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-purple-400 focus:outline-none"
+            placeholder="Paste the job description here..."
+            rows={6}
+            value={jobDescription || ""}
+            onChange={(e) => setJobDescription(e.target.value)}
+          />
+          </div>
+      </div>
+
     </div>
+  );
 };
 
 export default AdditionalInfoFrom;
