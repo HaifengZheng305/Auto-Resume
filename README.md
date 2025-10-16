@@ -5,6 +5,13 @@
 Auto Resume is a full-stack web application that generates **tailored resumes** by aligning a user's professional experience with specific **job descriptions**. It leverages **AI (LangChain + GPT)** to create context-aware resume bullet points, helping users stand out in job applications.
 
 ---
+## 🌐 Live Demo
+
+🔗 [**Auto Resume on Render**](https://auto-resume.onrender.com)
+
+> ⚠️ When first trying to log in or sign up, the backend may take **30 seconds to 1 minute** to start up due to Render’s free-tier auto-sleep feature.  
+> Please be patient — thank you!
+---
 
 ## 🚀 Features
 
